@@ -4,6 +4,6 @@ import com.jesusfercan.associate.entity.User;
 
 public interface UserService {
 
-    User create();
-    User update();
+    User create(User user);
+    User update(User user);
 }

@@ -14,12 +14,12 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User create() {
-        return null;
+    public User create(User user) {
+        return  repository.save(user);
     }
 
     @Override
-    public User update() {
-        return null;
+    public User update(User user) {
+       return this.create(user);
     }
 }

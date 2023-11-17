@@ -13,12 +13,14 @@ public class AssociateServiceImpl implements AssociateService {
     public AssociateRepository repository;
 
     @Override
-    public Associate create() {
-        return null;
+    public Associate create(Associate associate) {
+
+        return repository.save(associate);
     }
 
     @Override
-    public Associate update() {
-        return null;
+    public Associate update(Associate associate) {
+
+        return this.create(associate);
     }
 }

@@ -15,8 +15,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(User user) {
-        repository.findById(user.getId());
-        //if(repository.findByLogin(user.getLogin()) != null);
         return  repository.save(user);
     }
 

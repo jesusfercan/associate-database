@@ -17,7 +17,7 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users",uniqueConstraints = { @UniqueConstraint(columnNames = { "email", "login" })})
 @Data
 @Builder
 @NoArgsConstructor

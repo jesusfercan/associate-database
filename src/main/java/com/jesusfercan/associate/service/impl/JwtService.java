@@ -1,6 +1,7 @@
 package com.jesusfercan.associate.service.impl;
 
 import com.jesusfercan.associate.entity.User;
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -40,4 +41,12 @@ public class JwtService {
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
     }
 
+    public String extract(String jwtToken) {
+        return  extractAllClaims(jwtToken).getSubject();
+    }
+
+    private Claims extractAllClaims(String jwtToken) {
+        return Jwts.parserBuilder().setSigningKey(generateKey()).build()
+                .parseClaimsJws(jwtToken).getBody();
+    }
 }

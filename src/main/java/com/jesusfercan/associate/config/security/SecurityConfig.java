@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
 @Configuration
@@ -22,6 +23,8 @@ public class SecurityConfig {
     @Autowired
     private AuthenticationProvider authenticationProvider;
 
+    @Autowired
+    private JwtAuthenticationFilter authenticationFilter;
 
 
     @Bean
@@ -29,10 +32,11 @@ public class SecurityConfig {
             http
                     .csrf(AbstractHttpConfigurer::disable)
                     .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                    .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
                     .authenticationProvider(authenticationProvider)
                     .authorizeHttpRequests((auth) -> auth
                             .requestMatchers("/auth/login").permitAll()
-                            .requestMatchers("/user/**").permitAll()
+                            .requestMatchers("/user/**").hasRole(Role.ADMINISTRATOR.name())
                             .requestMatchers("/error/**").permitAll()
                             .requestMatchers("/admin/**").hasRole(Role.ADMINISTRATOR.name())
                             .anyRequest().authenticated()

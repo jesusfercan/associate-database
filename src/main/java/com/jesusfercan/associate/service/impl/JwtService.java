@@ -3,14 +3,12 @@ package com.jesusfercan.associate.service.impl;
 import com.jesusfercan.associate.entity.User;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
-
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Map;
 

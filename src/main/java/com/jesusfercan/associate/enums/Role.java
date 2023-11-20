@@ -1,6 +1,6 @@
 package com.jesusfercan.associate.enums;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
 
 import java.util.Arrays;
 import java.util.List;

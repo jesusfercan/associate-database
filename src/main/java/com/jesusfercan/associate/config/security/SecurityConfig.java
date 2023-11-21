@@ -1,5 +1,6 @@
 package com.jesusfercan.associate.config.security;
 
+import com.jesusfercan.associate.enums.Permission;
 import com.jesusfercan.associate.enums.Role;
 import com.jesusfercan.associate.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +35,12 @@ public class SecurityConfig {
                     .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                     .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
                     .authenticationProvider(authenticationProvider)
-                    .authorizeHttpRequests((auth) -> auth
+                    .authorizeHttpRequests( auth -> auth
                             .requestMatchers("/auth/login").permitAll()
                             .requestMatchers("/user/**").hasRole(Role.ADMINISTRATOR.name())
                             .requestMatchers("/error/**").permitAll()
                             .requestMatchers("/admin/**").hasRole(Role.ADMINISTRATOR.name())
+                            .requestMatchers("/associate/**").hasAuthority(Permission.READ_ALL_DATABASE.name())
                             .anyRequest().authenticated()
                 );
         return http.build();
@@ -62,6 +64,6 @@ public class SecurityConfig {
                 .loginPage("/login").permitAll();
         return http.build();
     }
-
+https://www.baeldung.com/spring-deprecated-websecurityconfigureradapter
      */
 }
